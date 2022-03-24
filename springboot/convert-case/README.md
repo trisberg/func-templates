@@ -2,7 +2,7 @@
 
 Welcome to your new Function project!
 
-This sample project contains a single function based on Spring Cloud Function: `echo.EchoFunction`, which returns an echo of the data passed via CloudEvents.
+This template project contains a two functions based on Spring Cloud Function: `functions.UpperFunction` and `functions.LowerFunction`. They return an echo of the data passed via CloudEvents converted to uppercase or lowercase respectively.
 
 ## Local execution
 
@@ -31,7 +31,7 @@ echo "export FUNC_REGISTRY=docker.io/johndoe" >> ~/.bashrc
 This command builds an OCI image for the function. By default, this will build a JVM image.
 
 ```shell script
-func build -v                  # build image
+func build -v    # build image
 ```
 
 **Note**: If you want to enable the native build, you need to edit the `func.yaml` file and
@@ -57,17 +57,17 @@ func run
 This command will build and deploy the function into cluster.
 
 ```shell script
-func deploy -v # also triggers build
+func deploy -v    # also triggers build
 ```
 
 ## Function invocation
 
 Spring Cloud Functions allows you to route CloudEvents to specific functions using the `Ce-Type` attribute.
-For this example, the CloudEvent is routed to the `echo` function. You can define multiple functions inside this project
-and then use the `Ce-Type` attribute to route different CloudEvents to different Functions.
+For this example, the CloudEvent is routed to the `upper` or `lower` function. You can define additional functions 
+inside this project and then use the `Ce-Type` attribute to route different CloudEvents to different Functions.
 Check the `src/main/resources/application.properties` file for the `functionRouter` configurations.
 Notice that you can also use `path-based` routing and send the any event type by specifying the function path,
-for this example: "$URL/echo".
+for this example: "$URL/upper" or "$URL/lower".
 
 For the examples below, please be sure to set the `URL` variable to the route of your function.
 
