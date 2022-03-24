@@ -13,7 +13,7 @@
   <groupId>com.example.events</groupId>
   <artifactId>function</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>Spring Cloud Function::Events Example</name>
+  <name>convert-case</name>
   <description>A Spring Cloud Function, using Cloud Events</description>
 
   <properties>
