@@ -2,11 +2,11 @@
 
 Welcome to your new Function project!
 
-This template project contains two functions based on Spring Cloud Function: `functions.UpperFunction` and `functions.LowerFunction`. They return an echo of the data passed via CloudEvents converted to uppercase or lowercase respectively.
+This template project contains a `hell-fun` function based on Spring Cloud Functio. It returns an echo of the data passed in prefixed with "Hello".
 
 ## Local execution
 
-Make sure that `Java 11 SDK` is installed.
+Make sure that `Java 17 SDK` or later is installed.
 
 To start server locally run `./mvnw spring-boot:run`.
 The command starts an http server and listens on port 8080.
@@ -44,7 +44,7 @@ buildEnvs:
 **Note**: If you are using an ARM based system like a new MacBook with an M1 or M2 chip, then your buildpack build might not complete. In this case you can build using Jib.
 
 ```shell script
-./mvnw compile com.google.cloud.tools:jib-maven-plugin:3.3.1:dockerBuild -Dimage=$FUNC_REGISTRY/convert-case
+./mvnw compile com.google.cloud.tools:jib-maven-plugin:3.3.1:dockerBuild -Dimage=$FUNC_REGISTRY/hello-fun
 ```
 
 ### Running
@@ -65,13 +65,6 @@ func deploy -v    # also triggers build
 ```
 
 ## Function invocation
-
-Spring Cloud Functions allows you to route CloudEvents to specific functions using the `Ce-Type` attribute.
-For this example, the CloudEvent is routed to the `upper` or `lower` function. You can define additional functions 
-inside this project and then use the `Ce-Type` attribute to route different CloudEvents to different Functions.
-Check the `src/main/resources/application.properties` file for the `functionRouter` configurations.
-Notice that you can also use `path-based` routing and send the any event type by specifying the function path,
-for this example: "$URL/upper" or "$URL/lower".
 
 For the examples below, please be sure to set the `URL` variable to the route of your function.
 
@@ -94,24 +87,10 @@ export URL=$(kn service describe $(basename $PWD) -ourl)
 
 ### func
 
-Using `func invoke` command with CloudEvents `Ce-Type` routing:
+Using `func invoke` command with plain text:
 
 ```shell script
-func invoke --type "upper"
-```
-
-```shell script
-func invoke --type "lower"
-```
-
-Using Path-Based routing:
-
-```shell script
-func invoke --target "$URL/upper"
-```
-
-```shell script
-func invoke --target "$URL/lower"
+func invoke --data Fun
 ```
 
 ## Cleanup
