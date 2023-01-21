@@ -2,7 +2,7 @@
 
 Welcome to your new Function project!
 
-This template project contains a `hell-fun` function based on Spring Cloud Functio. It returns an echo of the data passed in prefixed with "Hello".
+This template project contains a `hello-fun` function based on Spring Cloud Functio. It returns an echo of the data passed in prefixed with "Hello".
 
 ## Local execution
 
