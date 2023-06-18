@@ -3,6 +3,10 @@ builders:
 buildEnvs:
   - name: BP_NATIVE_IMAGE
     value: "false"
+  - name: BP_JVM_VERSION
+    value: "17"
+  - name: BP_MAVEN_ADDITIONAL_BUILD_ARGUMENTS
+    value: "-Pnative"
 healthEndpoints:
   liveness: /actuator/health
   readiness: /actuator/health 
