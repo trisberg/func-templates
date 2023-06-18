@@ -1,0 +1,53 @@
+accelerator:
+  displayName: Hello Fun
+  description: A simple Spring Cloud Function serverless app
+  iconUrl: https://avatars.githubusercontent.com/u/35583233?s=200&v=4
+  tags:
+  - java
+  - spring
+  - cloud
+  - function
+  - serverless
+  - tanzu
+  - knative
+
+engine:
+  merge:
+    - include: [ "**" ]
+      exclude: [ "pom.xml",  "Tiltfile", "skaffold.yaml", "README.md", "DEPLOYING.md", "manifest.yaml", "catalog/*.yaml", "config/*.yaml", "knative/*.yaml" ]
+    - include: [ "pom.xml" ]
+      chain:
+      - type: ReplaceText
+        substitutions:
+        - text: hello-fun
+          with: "#artifactId"
+    - include: [ "Tiltfile", "skaffold.yaml" ]
+      chain:
+      - type: ReplaceText
+        substitutions:
+        - text: hello-fun
+          with: "#artifactId"
+    - include: [ "catalog/*.yaml", "config/*.yaml", "knative/*.yaml" ]
+      chain:
+      - type: ReplaceText
+        substitutions:
+        - text: hello-fun
+          with: "#artifactId"
+    - name: README
+      type: Combo
+      onConflict: Append
+      sources:
+      - include: [ "README.md"]
+        chain:
+        - type: ReplaceText
+          substitutions:
+          - text: hello-fun
+            with: "#artifactId"
+      - include: [ "DEPLOYING.md" ]
+        chain:
+        - type: ReplaceText
+          substitutions:
+          - text: hello-fun
+            with: "#artifactId"
+        - type: RewritePath
+          rewriteTo: "'README.md'"
