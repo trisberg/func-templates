@@ -1,0 +1,22 @@
+apiVersion: carto.run/v1alpha1
+kind: Workload
+metadata:
+  name: hello-fun
+  labels:
+    apps.tanzu.vmware.com/workload-type: web
+    apps.tanzu.vmware.com/has-tests: "true"
+    app.kubernetes.io/part-of: hello-fun
+spec:
+  build:
+    env:
+      - name: BP_NATIVE_IMAGE
+        value: "false"
+      - name: BP_JVM_VERSION
+        value: "17"
+      - name: BP_MAVEN_ADDITIONAL_BUILD_ARGUMENTS
+        value: "-Pnative"
+  source:
+    git:
+      url: https://github.com/trisberg/hello-fun.git
+      ref:
+        branch: main
